@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Be My Valentine ❤</title>
+<style>
+body{margin:0;font-family:'Segoe UI',sans-serif;height:100vh;background:linear-gradient(135deg,#ff9a9e,#fad0c4);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.card{background:white;padding:40px 60px;border-radius:20px;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,.2);animation:fadeIn 2s ease;position:relative}
+h1{color:#ff4b6e;font-size:2.6rem;margin-bottom:10px}
+p{font-size:1.2rem;color:#444}
+.buttons{margin-top:25px}
+button{padding:12px 24px;border:none;border-radius:25px;font-size:1.1rem;cursor:pointer;transition:.3s;margin:10px}
+#yes{background:#ff4b6e;color:white}
+#no{background:#ddd;position:relative}
+
+.glow{box-shadow:0 0 10px #ff4b6e,0 0 25px #ff4b6e,0 0 45px #ff4b6e}
+.pulse{animation:pulse .6s ease}
+@keyframes pulse{0%{transform:scale(1)}25%{transform:scale(1.2)}50%{transform:scale(.95)}75%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+.heart{position:absolute;width:20px;height:20px;background:red;transform:rotate(45deg);animation:float 6s infinite ease-in}
+.heart:before,.heart:after{content:"";position:absolute;width:20px;height:20px;background:red;border-radius:50%}
+.heart:before{top:-10px;left:0}
+.heart:after{left:-10px;top:0}
+@keyframes float{0%{transform:translateY(100vh) rotate(45deg);opacity:1}100%{transform:translateY(-10vh) rotate(45deg);opacity:0}}
+@keyframes fadeIn{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+#message{margin-top:20px;font-weight:bold;color:#ff4b6e;min-height:40px}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>Will you be my Valentine,Mona🐼? 💖</h1>
+<p>I promise snacks, memes and zero boring days 😌</p>
+<div class="buttons">
+<button id="yes" onclick="accepted()">Yes 💘</button>
+<button id="no" onclick="moveNo()">No 😢</button>
+</div>
+<p id="message"></p>
+</div>
+<script>
+const threats=[
+"That was the wrong answer 😐 try again",
+"System error: Only YES is supported 🤖",
+"You really thought that would work? 😏",
+"Careful… the button is getting annoyed 😤",
+"Last warning… choose wisely ⚠",
+"Okay now you're just being stubborn 😭",
+"BITCH I KNOW WHERE YOU LIVE😡🔪",
+"ok ok its a joke ,Still no🥺*sniff*"
+];
+let threatIndex=0;
+
+function moveNo(){
+ const no=document.getElementById('no');
+ const yes=document.getElementById('yes');
+ const msg=document.getElementById('message');
+ const x=Math.random()*300-150;
+ const y=Math.random()*200-100;
+ no.style.transform=`translate(${x}px,${y}px)`;
+
+ // show funny threatening message
+ msg.innerText=threats[threatIndex%threats.length];
+ threatIndex++;
+
+ // heartbeat glow
+ yes.classList.add('glow','pulse');
+ setTimeout(()=>yes.classList.remove('pulse'),600);
+}
+
+function accepted(){
+ document.getElementById('message').innerHTML="You chose correctly 😌<br><br>Why I'm a good choice:<br>• Loyal<br>• Funny (sometimes unintentionally)<br>• Will share food 🍕<br>• Will listen to your problems<br>• Free Kiss forever and Somthing Somthing 😏👌";
+}
+
+function createHeart(){
+ const heart=document.createElement('div');
+ heart.className='heart';
+ heart.style.left=Math.random()*100+'vw';
+ heart.style.animationDuration=4+Math.random()*4+'s';
+ document.body.appendChild(heart);
+ setTimeout(()=>heart.remove(),8000);
+}
+setInterval(createHeart,300);
+</script>
+</body>
+</html>
